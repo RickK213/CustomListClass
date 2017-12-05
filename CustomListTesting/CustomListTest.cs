@@ -8,6 +8,7 @@ namespace CustomListTesting
     public class CustomListTest
     {
 
+        //Add method tests================================================================================================================
         [TestMethod]
         public void Add_AddFirstString_FirstItemEqualsStringAdded()
         {
@@ -53,9 +54,27 @@ namespace CustomListTesting
             CustomList<string> myList = new CustomList<string>();
 
             //act
-            for (int i=0; i<5; i++ )
+            for (int i = 0; i < 5; i++)
             {
                 myList.Add(testString);
+            }
+
+            //assert
+            Assert.AreEqual(myList.Count, 5); //Need to set up Count as a property!!!
+        }
+
+        [TestMethod]
+        public void Add_AddTwentyItems_CountEqualsTwenty()
+        {
+            //When I call the Add method twenty times, I expect the count property of the CustomList object to be equal to 20
+
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+
+            //act
+            for (int i = 0; i < 5; i++)
+            {
+                myList.Add(i);
             }
 
             //assert
@@ -112,6 +131,42 @@ namespace CustomListTesting
 
             //assert
             Assert.AreEqual(myList[2], itemThree);
+        }
+
+        [TestMethod]
+        public void Add_AddThirtyNumbersAsStrings_IndexesEqualStringValue()
+        {
+            //When I add number.ToString() to CustomList, I expect the indexes to be equal to the Int32.Parse value
+
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+
+            //act
+            for ( int i=0; i<30; i++ )
+            {
+                myList.Add( i.ToString() );
+            }
+
+            //assert
+            Assert.AreEqual(Int32.Parse(myList[12]), 12);
+        }
+
+        //Remove method tests================================================================================================================
+        [TestMethod]
+        public void Remove_AddAndRemoveOneObject_CustomListDoesNotContainObject()
+        {
+            //When I add to and remove one object from my CustomList, I expect the CustomList to not contain the object 
+
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            Object obj = new Object();
+            myList.Add(obj);
+
+            //act
+            myList.Remove(obj);
+
+            //assert
+            //YOU ARE HERE! NEED TO WRITE YOUR ASSERT!
         }
 
 

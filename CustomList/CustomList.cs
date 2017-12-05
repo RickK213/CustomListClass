@@ -10,6 +10,7 @@ namespace CustomListClass
     {
         //member variables
         int count;
+        int capacity;
         T[] listItems;
 
         //properties
@@ -18,10 +19,15 @@ namespace CustomListClass
             get { return count; }
         }
 
+        public int Capacity
+        {
+            get { return capacity; }
+        }
+
         //The below is an indexer================================================================
         //Notes on indexers:
         //An indexer is a class property
-        //It is a 'parameterized' property  - it has parameters
+        //It is a 'parameterized' property - it has parameters
         //'ref' and 'out' paramter modifiers are now allowed
         //at least one parameter should be specified
 
@@ -42,7 +48,8 @@ namespace CustomListClass
         public CustomList()
         {
             count = 0;
-
+            capacity = 5;
+            listItems = new T[capacity];
         }
 
         //member methods
@@ -50,14 +57,27 @@ namespace CustomListClass
         //Add to end of array
         public void Add(T item)
         {
-            T[] newListItems = new T[count+1];
-            newListItems[count] = item;
-            listItems = newListItems;
-            count++;
+            if ( count * 2 >= capacity )
+            {
+                capacity *= 2;
+                T[] newListItems = new T[capacity];
+                for (int i=0; i<count; i++)
+                {
+                    newListItems[i] = listItems[i];
+                }
+                newListItems[count] = item;
+                listItems = newListItems;
+                count++;
+            }
+            else
+            {
+                listItems[count] = item;
+                count++;
+            }
         }
 
         //Remove first instance from array
-        public void Remove()
+        public void Remove(T item)
         {
 
         }
