@@ -265,6 +265,19 @@ namespace CustomListTesting
         }
 
         [TestMethod]
+        public void Remove_RemoveIntegerZeroFromEmptyList_RemoveReturnsFalse()
+        {
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+
+            //act
+            bool result = myList.Remove(0);
+
+            //assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
         public void Contains_AddIntegerRunContainsForThatInteger_ResultIsTrue()
         {
             //arrange
