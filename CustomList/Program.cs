@@ -10,6 +10,9 @@ namespace CustomListClass
     {
         static void Main(string[] args)
         {
+            CustomList<int> integerList = new CustomList<int>();
+            integerList.Add(1);
+            int test = integerList[1];
 
         }
     }

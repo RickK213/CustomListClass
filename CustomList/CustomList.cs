@@ -35,7 +35,14 @@ namespace CustomListClass
         {
             get
             {
-                return listItems[i];
+                if ( i > count-1 )
+                {
+                    throw new Exception("Index out of range of CustomList");
+                }
+                else
+                {
+                    return listItems[i];
+                }
             }
             set
             {
@@ -76,10 +83,16 @@ namespace CustomListClass
             }
         }
 
-        //Remove first instance from array
-        public void Remove(T item)
+        public bool Remove(T item)
         {
+            //search for the index of item by using a while loop that ends when the item is found or count is reached
+            //if the item is not found, return false
+            //else
+                //create a new array based on listItems but skip the index found above - use a for loop and decrement i at the correct spot?
+                //set listItems to the new array
+                //return true
 
+            return false;
         }
 
     }

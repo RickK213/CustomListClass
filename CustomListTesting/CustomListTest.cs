@@ -8,7 +8,7 @@ namespace CustomListTesting
     public class CustomListTest
     {
 
-        //Add method tests================================================================================================================
+        //Add method tests=====================================================================================================
         [TestMethod]
         public void Add_AddFirstString_FirstItemEqualsStringAdded()
         {
@@ -151,11 +151,17 @@ namespace CustomListTesting
             Assert.AreEqual(Int32.Parse(myList[12]), 12);
         }
 
-        //Remove method tests================================================================================================================
+        //Remove method tests=================================================================================================
         [TestMethod]
-        public void Remove_AddAndRemoveOneObject_CustomListDoesNotContainObject()
+        [ExpectedException(typeof(Exception))]
+        public void Remove_AddAndRemoveOneObject_CustomListZeroIndexThrowsException()
         {
-            //When I add to and remove one object from my CustomList, I expect the CustomList to not contain the object 
+            //When I add to and remove one object from my CustomList, I expect CustomList[0] to throw an exception
+
+            //NOTE!!! what if we have a list of integers? Intantiation of the list creates a list of 5 0's
+            //Modify the indexer to throw an exception if you try to access any list index when the list (should) be empty
+            //or when you try to access and index lower than the count
+            //Note! You need to be sure that legitimate 0 values remain
 
             //arrange
             CustomList<Object> myList = new CustomList<Object>();
@@ -166,9 +172,139 @@ namespace CustomListTesting
             myList.Remove(obj);
 
             //assert
-            //YOU ARE HERE! NEED TO WRITE YOUR ASSERT!
+            //NO ASSERT WHEN TESTING FOR AN EXCEPTION! See [ExpectedException...] above
+            //this test passes because we are expecting an exception. You can be more specific about what type of exception you expect
+            //the type of exception I expect is 'System.Exception' according to my indexer
+
         }
 
+        [TestMethod]
+        public void Remove_AddAndRemoveOneObject_CustomListCountIsZero()
+        {
+            //When I add to and remove one object from my CustomList, I expect the Count of the CustomList to be zero 
+
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            Object obj = new Object();
+            myList.Add(obj);
+
+            //act
+            myList.Remove(obj);
+
+
+            //assert
+            Assert.AreEqual(myList.Count, 0);
+        }
+
+        [TestMethod]
+        public void Remove_AddFiveObjectsAndRemoveOneObject_CustomListCountIsFour()
+        {
+            //When I add 5 objects and remove one object from my CustomList, I expect the Count of the CustomList to be four 
+
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            Object obj = new Object();
+            for (int i = 0; i < 5; i++)
+            {
+                myList.Add(obj);
+            }
+
+            //act
+            myList.Remove(obj);
+
+            //assert
+            Assert.AreEqual(myList.Count, 4);
+        }
+
+        [TestMethod]
+        public void Remove_AddFourStringsAndRemoveOneString_LastItemInCustomListIsThirdAdded()
+        {
+            //When I add 4 strings and remove one string from my CustomList, I expect the last item in the CustomList to be third one added 
+
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            myList.Add("string 1");
+            myList.Add("string 2");
+            myList.Add("string 3");
+            myList.Add("string 4");
+
+            //act
+            myList.Remove("string 4");
+
+            //assert
+            Assert.AreEqual(myList[myList.Count - 1], "string 3");
+        }
+
+        [TestMethod]
+        public void Remove_AddAndRemoveOneObject_MethodReturnsTrue()
+        {
+            //When I add to and remove one object from my CustomList, I expect the Remove method to return true 
+
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            Object obj = new Object();
+            myList.Add(obj);
+
+            //act
+            bool didRemove = myList.Remove(obj);
+
+            //assert
+            Assert.IsTrue(didRemove);
+        }
+
+        [TestMethod]
+        public void Remove_AddStringAndRemoveUnfindableString_MethodReturnsFalse()
+        {
+            //When I add a string and remove an unfindable string from my CustomList, I expect the Remove method to return false
+
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("Findable String");
+
+            //act
+            bool didRemove = myList.Remove("Unfindable String");
+
+            //assert
+            Assert.IsFalse(didRemove);
+        }
+
+        [TestMethod]
+        public void Remove_AddFourIntegersAndRemoveSecondInteger_ThirdIntegerShiftsToIndexOne()
+        {
+            //When I add 4 integers to my CustomList and Remove the 2nd integer added, I expect the third integer to shift to index 1 
+
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            //act
+            myList.Remove(2);
+
+            //assert
+            Assert.AreEqual(myList[1], 3);
+        }
+
+        [TestMethod]
+        public void Remove_AddFourIntegersAndRemoveSecondInteger_FourthIntegerShiftsToIndexTwo()
+        {
+            //When I add 4 integers to my CustomList and Remove the 2nd integer added, I expect the fourth integer added to shift to index 2 
+
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            //act
+            myList.Remove(2);
+
+            //assert
+            Assert.AreEqual(myList[2], 4);
+        }
 
     }
 }
