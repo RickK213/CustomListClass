@@ -488,15 +488,37 @@ namespace CustomListTesting
         }
 
         [TestMethod]
-        public void ToString_WhatIDo_WhatIExpect()
+        public void ToString_AddFourStrings_ResultIsConcatenatedString()
         {
             //arrange
-            CustomList<Object> myList = new CustomList<Object>();
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+            myList.Add("beta");
+            myList.Add("charlie");
+            myList.Add("delta");
 
             //act
+            string result = myList.ToString();
 
             //assert
-            //Assert.IsTrue(objectsEqualObject);
+            Assert.AreEqual(result, "alphabetacharliedelta");
+        }
+
+        [TestMethod]
+        public void ToString_AddFourIntegers_ResultIsConcatenatedString()
+        {
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            //act
+            string result = myList.ToString();
+
+            //assert
+            Assert.AreEqual(result, "1234");
         }
 
     }
