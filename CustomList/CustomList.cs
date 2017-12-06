@@ -62,26 +62,26 @@ namespace CustomListClass
 
         //member methods
 
-        //Add to end of array
+        T[] GetLargerArray()
+        {
+            capacity *= 2;
+            T[] newListItems = new T[capacity];
+            for (int i = 0; i < count; i++)
+            {
+                newListItems[i] = listItems[i];
+            }
+            return newListItems;
+        }
+
         public void Add(T item)
         {
             if ( count * 2 >= capacity )
             {
-                capacity *= 2;
-                T[] newListItems = new T[capacity];
-                for (int i=0; i<count; i++)
-                {
-                    newListItems[i] = listItems[i];
-                }
-                newListItems[count] = item;
+                T[] newListItems = GetLargerArray();
                 listItems = newListItems;
-                count++;
             }
-            else
-            {
-                listItems[count] = item;
-                count++;
-            }
+            listItems[count] = item;
+            count++;
         }
 
         public bool Remove(T item)
@@ -119,14 +119,6 @@ namespace CustomListClass
                 listItems = newListItems;
                 return true;
             }
-
-            //PLAN OF ATTACK:
-            //search for the index of item by using a while loop that ends when the item is found or count is reached
-            //if the item is not found, return false
-            //else
-                //create a new array based on listItems but skip the index found above - use a for loop and decrement i at the correct spot?
-                //set listItems to the new array
-                //return true
 
         }
 
