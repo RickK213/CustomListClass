@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomListClass
 {
-    public class CustomList<T> : IEnumerable<T>
+    public class CustomList<T> : IEnumerable<T>, IEquatable<T>
     {
         //member variables
         int count;
@@ -31,7 +31,6 @@ namespace CustomListClass
         //It is a 'parameterized' property - it has parameters
         //'ref' and 'out' paramter modifiers are now allowed
         //at least one parameter should be specified
-
         public T this [int i]
         {
             get
@@ -135,7 +134,6 @@ namespace CustomListClass
             return true;
         }
 
-
         public IEnumerator<T> GetEnumerator()
         {
             for ( int i=0; i<count; i++ )
@@ -151,7 +149,22 @@ namespace CustomListClass
 
         public override string ToString()
         {
-            return "";
+            string result = "";
+            for (int i = 0; i < count; i++)
+            {
+                result += listItems[i].ToString();
+            }
+            return result;
+        }
+
+        public bool Equals(T other) //NEED TO WRITE THIS! Has to work for different types that you specify?
+        {
+            return false;
+        }
+
+        public static CustomList<T> operator+(CustomList<T> listOne, CustomList<T> listTwo) //NEED TO WRITE THIS AFTER MAKING CLASS EQUATABLE
+        { 
+            return new CustomList<T>();
         }
 
     }

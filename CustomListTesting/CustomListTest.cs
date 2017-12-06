@@ -521,5 +521,121 @@ namespace CustomListTesting
             Assert.AreEqual(result, "1234");
         }
 
+        //YOU ARE HERE!!! On Thursday morning, get sign off from Andrew or Mike to implement the IEquatable interface
+        [TestMethod]
+        public void Equals_CreateTwoIdenticalNumberLists_ListsEqualEachother()
+        {
+            //arrange
+            CustomList<int> numberListOne = new CustomList<int>();
+            numberListOne.Add(1);
+            numberListOne.Add(2);
+
+            CustomList<int> numberListTwo = new CustomList<int>();
+            numberListOne.Add(1);
+            numberListOne.Add(2);
+
+            //act
+            bool result = numberListOne.Equals(numberListTwo);
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Equals_CreateTwoIdenticalStringLists_ListsEqualEachother()
+        {
+            //arrange
+            CustomList<string> stringListOne = new CustomList<string>();
+            stringListOne.Add("alpha");
+            stringListOne.Add("beta");
+
+            CustomList<string> stringListTwo = new CustomList<string>();
+            stringListOne.Add("alpha");
+            stringListOne.Add("beta");
+
+            //act
+            bool result = stringListOne.Equals(stringListTwo);
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Equals_CreateTwoIdenticalObjectLists_ListsEqualEachother()
+        {
+            //arrange
+            CustomList<Object> objectListOne = new CustomList<Object>();
+            objectListOne.Add(new Object());
+            objectListOne.Add(new Object());
+
+            CustomList<Object> objectListTwo = new CustomList<Object>();
+            objectListTwo.Add(new Object());
+            objectListTwo.Add(new Object());
+
+            //act
+            bool result = objectListOne.Equals(objectListTwo);
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Plus_AddTwoIntegerLists_ResultIsCombinedList()
+        {
+            //arrange
+            CustomList<int> numberListOne = new CustomList<int>();
+            numberListOne.Add(1);
+            numberListOne.Add(2);
+            numberListOne.Add(3);
+            numberListOne.Add(4);
+
+            CustomList<int> numberListTwo = new CustomList<int>();
+            numberListTwo.Add(5);
+            numberListTwo.Add(6);
+            numberListTwo.Add(7);
+            numberListTwo.Add(8);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
+            expectedResult.Add(4);
+            expectedResult.Add(5);
+            expectedResult.Add(6);
+            expectedResult.Add(7);
+            expectedResult.Add(8);
+
+            //act
+            CustomList<int> result = numberListOne + numberListTwo;
+
+            //assert
+            Assert.AreEqual(result, expectedResult); //NEED TO IMPLEMENT IEquatable interface for this to work
+        }
+
+        [TestMethod]
+        public void Plus_AddTwoStringLists_ResultIsCombinedList()
+        {
+            //arrange
+            CustomList<string> stringListOne = new CustomList<string>();
+            stringListOne.Add("alpha");
+            stringListOne.Add("beta");
+
+            CustomList<string> numberListTwo = new CustomList<string>();
+            numberListTwo.Add("charlie");
+            numberListTwo.Add("delta");
+
+            CustomList<string> expectedResult = new CustomList<string>();
+            expectedResult.Add("alpha");
+            expectedResult.Add("beta");
+            expectedResult.Add("charlie");
+            expectedResult.Add("delta");
+
+            //act
+            CustomList<string> result = stringListOne + numberListTwo;
+
+            //assert
+            Assert.AreEqual(result, expectedResult); //NEED TO IMPLEMENT IEquatable interface for this to work
+        }
+
     }
 }
