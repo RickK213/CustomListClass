@@ -419,5 +419,85 @@ namespace CustomListTesting
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void GetEnumerator_AddTwoIntegersToListForeachToCalculateSum_SumIsAllCorrectSumOfAllListItems()
+        {
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+            myList.Add(1);
+            myList.Add(1);
+
+            //act
+            int sum = 0;
+            foreach (int number in myList)
+            {
+                sum += number;
+            }
+
+            //assert
+            Assert.AreEqual(sum, 2);
+        }
+
+        [TestMethod]
+        public void GetEnumerator_UseForEachToLookForString_StringIsFound()
+        {
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+            myList.Add("beta");
+            myList.Add("charlie");
+            myList.Add("delta");
+
+            //act
+            bool charlieFound = false;
+            foreach (string word in myList)
+            {
+                if (word == "charlie")
+                {
+                    charlieFound = true;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(charlieFound);
+        }
+
+        [TestMethod]
+        public void GetEnumerator_UseForEachToActOnObject_ObjectsInListEqualsOriginal()
+        {
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            Object obj = new object();
+            for (int i=0; i<5; i++)
+            {
+                myList.Add(obj);
+            }
+
+            //act
+            bool objectsEqualObject = true;
+            foreach (Object genericObject in myList)
+            {
+                if(!genericObject.Equals(obj))
+                {
+                    objectsEqualObject = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(objectsEqualObject);
+        }
+
+        [TestMethod]
+        public void ToString_WhatIDo_WhatIExpect()
+        {
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+
+            //act
+
+            //assert
+            //Assert.IsTrue(objectsEqualObject);
+        }
+
     }
 }
