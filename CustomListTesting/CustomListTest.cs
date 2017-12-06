@@ -374,5 +374,37 @@ namespace CustomListTesting
             Assert.AreEqual(result, 1);
         }
 
+        [TestMethod]
+        public void RemoveAt_AddItemRemoveAtIndexZero_CountOfCustomListIsZero()
+        {
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+
+            //act
+            myList.RemoveAt(0);
+
+            //assert
+            Assert.AreEqual(myList.Count, 0);
+        }
+
+        [TestMethod]
+        public void RemoveAt_AddFourItemsRemoveIndexTwo_ContainsReturnsFalse()
+        {
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+            myList.Add("beta");
+            myList.Add("charlie");
+            myList.Add("delta");
+
+            //act
+            myList.RemoveAt(2);
+            bool result = myList.Contains("charlie");
+
+            //assert
+            Assert.IsFalse(result);
+        }
+
     }
 }
