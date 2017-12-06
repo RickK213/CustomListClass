@@ -65,61 +65,74 @@ namespace CustomListClass
         T[] GetLargerArray()
         {
             capacity *= 2;
-            T[] newListItems = new T[capacity];
+            T[] largerArray = new T[capacity];
             for (int i = 0; i < count; i++)
             {
-                newListItems[i] = listItems[i];
+                largerArray[i] = listItems[i];
             }
-            return newListItems;
+            return largerArray;
         }
 
         public void Add(T item)
         {
             if ( count * 2 >= capacity )
             {
-                T[] newListItems = GetLargerArray();
-                listItems = newListItems;
+                T[] largerArray = GetLargerArray();
+                listItems = largerArray;
             }
             listItems[count] = item;
             count++;
         }
 
-        public bool Remove(T item)
+        public bool Contains(T item)
         {
-            bool itemFound = false;
-            int i = 0;
-            int itemIndex = 0;
-            while(!itemFound && i<count)
+            for ( int i=0; i<count; i++ )
             {
                 if ( listItems[i].Equals(item) )
                 {
-                    itemIndex = i;
-                    itemFound = true;
+                    return true;
                 }
-                i++;
             }
-            if ( !itemFound )
+            return false;
+        }
+
+        public int IndexOf(T item)
+        {
+            for (int i=0; i<count; i++)
+            {
+                if ( listItems[i].Equals(item) )
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void RemoveAt(int itemIndex)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (i < itemIndex)
+                {
+                    listItems[i] = listItems[i];
+                }
+                else if (i > itemIndex)
+                {
+                    listItems[i - 1] = listItems[i];
+                }
+            }
+            count--;
+        }
+
+        public bool Remove(T item)
+        {
+            if (!Contains(item))
             {
                 return false;
             }
-            else
-            {
-                T[] newListItems = new T[capacity];
-                for ( int j=0; j<count; j++ )
-                {
-                    if ( j<itemIndex )
-                    {
-                        newListItems[j] = listItems[j];
-                    }
-                    else if (j>itemIndex) {
-                        newListItems[j-1] = listItems[j];
-                    }
-                }
-                count--;
-                listItems = newListItems;
-                return true;
-            }
-
+            int itemIndex = IndexOf(item);
+            RemoveAt(itemIndex);
+            return true;
         }
 
     }

@@ -307,5 +307,52 @@ namespace CustomListTesting
             Assert.AreEqual(myList[2], 4);
         }
 
+        [TestMethod]
+        public void Contains_AddIntegerRunContainsForThatInteger_ResultIsTrue()
+        {
+            //When I add and item to my CustomList and run the Contains method for that integer, I expect it to return true
+
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+            myList.Add(0);
+
+            //act
+            bool result = myList.Contains(0);
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Contains_RunContainsOnEmptyList_ResultIsFalse()
+        {
+            //When I run the Contains method on an empty CustomList, I expect the result to be false 
+
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+
+            //act
+            bool result = myList.Contains("literally anything");
+
+            //assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void Contains_AddFindableRunsContainsOnUnfindable_ResultIsFalse()
+        {
+            //When I add a string to my CustomList and run the Contains method for another string, I expect it to return false
+
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("Findable String");
+
+            //act
+            bool result = myList.Contains("Unfindable String");
+
+            //assert
+            Assert.IsFalse(result);
+        }
+
     }
 }
