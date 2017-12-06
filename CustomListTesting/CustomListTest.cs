@@ -170,6 +170,7 @@ namespace CustomListTesting
 
             //act
             myList.Remove(obj);
+            Object newObj = myList[0];
 
             //assert
             //NO ASSERT WHEN TESTING FOR AN EXCEPTION! See [ExpectedException...] above

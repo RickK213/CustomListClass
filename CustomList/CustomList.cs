@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,6 +86,41 @@ namespace CustomListClass
 
         public bool Remove(T item)
         {
+            bool itemFound = false;
+            int i = 0;
+            int itemIndex = 0;
+            while(!itemFound && i<count)
+            {
+                if ( listItems[i].Equals(item) )
+                {
+                    itemIndex = i;
+                    itemFound = true;
+                }
+                i++;
+            }
+            if ( !itemFound )
+            {
+                return false;
+            }
+            else
+            {
+                T[] newListItems = new T[capacity];
+                for ( int j=0; j<count; j++ )
+                {
+                    if ( j<itemIndex )
+                    {
+                        newListItems[j] = listItems[j];
+                    }
+                    else if (j>itemIndex) {
+                        newListItems[j-1] = listItems[j];
+                    }
+                }
+                count--;
+                listItems = newListItems;
+                return true;
+            }
+
+            //PLAN OF ATTACK:
             //search for the index of item by using a while loop that ends when the item is found or count is reached
             //if the item is not found, return false
             //else
@@ -92,7 +128,6 @@ namespace CustomListClass
                 //set listItems to the new array
                 //return true
 
-            return false;
         }
 
     }
