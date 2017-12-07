@@ -9,7 +9,7 @@ namespace CustomListTesting
     {
 
         [TestMethod]
-        public void Add_AddFirstString_FirstItemEqualsStringAdded()
+        public void Add_AddFirstString_FirstItemInCustomListEqualsStringAdded()
         {
             //arrange
             string firstString = "alpha";
@@ -23,7 +23,7 @@ namespace CustomListTesting
         }
 
         [TestMethod]
-        public void Add_AddFirstString_CountEqualsOne()
+        public void Add_AddFirstString_CustomListCountEqualsOne()
         {
             //arrange
             string firstString = "alpha";
@@ -37,7 +37,7 @@ namespace CustomListTesting
         }
 
         [TestMethod]
-        public void Add_AddFiveItems_CountEqualsFive()
+        public void Add_AddFiveItems_CustomListCountEqualsFive()
         {
             //arrange
             string testString = "alpha";
@@ -54,7 +54,7 @@ namespace CustomListTesting
         }
 
         [TestMethod]
-        public void Add_AddTwentyItems_CountEqualsTwenty()
+        public void Add_AddTwentyItems_CustomListCountEqualsTwenty()
         {
             //arrange
             CustomList<int> myList = new CustomList<int>();
@@ -70,7 +70,7 @@ namespace CustomListTesting
         }
 
         [TestMethod]
-        public void Add_CreateNewList_CountEqualsZero()
+        public void Add_CreateNewList_CustomListCountEqualsZero()
         {
             //arrange
             CustomList<int> myList = new CustomList<int>();
@@ -83,7 +83,7 @@ namespace CustomListTesting
 
         [TestMethod]
         [ExpectedException(typeof(System.OutOfMemoryException))]
-        public void Add_AddIntMaxItems_CountEqualsIntMax()
+        public void Add_AddIntMaxItems_ThrowsOutOfMemoryException()
         {
             //arrange
             CustomList<int> myList = new CustomList<int>();
@@ -285,6 +285,24 @@ namespace CustomListTesting
         }
 
         [TestMethod]
+        public void Remove_AddFourIntegersAndRemoveFirstAndThirdInteger_FourthIntegerShiftsToIndexOne()
+        {
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+            myList.Add(4);
+
+            //act
+            myList.Remove(1);
+            myList.Remove(3);
+
+            //assert
+            Assert.AreEqual(myList[1], 4);
+        }
+
+        [TestMethod]
         public void Remove_RemoveIntegerZeroFromEmptyList_RemoveReturnsFalse()
         {
             //arrange
@@ -333,6 +351,38 @@ namespace CustomListTesting
 
             //act
             bool result = myList.Contains("Unfindable String");
+
+            //assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void Contains_AddTwoFindablesRunContainsOnFindable_ResultIsTrue()
+        {
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+            myList.Add("beta");
+            myList.Add("alpha");
+
+            //act
+            bool result = myList.Contains("alpha");
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Contains_AddAndRemoveFindableRunContainsOnFindable_ResultIsFalse()
+        {
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+            myList.Add("beta");
+            myList.Remove("alpha");
+
+            //act
+            bool result = myList.Contains("alpha");
 
             //assert
             Assert.IsFalse(result);
