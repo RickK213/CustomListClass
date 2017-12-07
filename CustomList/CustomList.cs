@@ -25,12 +25,7 @@ namespace CustomListClass
             get { return capacity; }
         }
 
-        //The below is an indexer================================================================
-        //Notes on indexers:
-        //An indexer is a class property
-        //It is a 'parameterized' property - it has parameters
-        //'ref' and 'out' paramter modifiers are now allowed
-        //at least one parameter should be specified
+        //indexer
         public T this [int i]
         {
             get
@@ -49,7 +44,6 @@ namespace CustomListClass
                 listItems[i] = value;
             }
         }
-        //End of indexer==========================================================================
 
         //constructor
         public CustomList()
@@ -60,7 +54,6 @@ namespace CustomListClass
         }
 
         //member methods
-
         T[] GetLargerArray()
         {
             capacity *= 2;
@@ -157,37 +150,46 @@ namespace CustomListClass
             return result;
         }
 
-        public static CustomList<T> operator +(CustomList<T> listOne, CustomList<T> listTwo)
+        CustomList<T> AddToList(CustomList<T> listToAdd)
         {
-            CustomList<T> addedList = new CustomList<T>();
-            for (int i = 0; i < listOne.Count; i++)
+            CustomList<T> addedList = this;
+            for (int i = 0; i < listToAdd.Count; i++)
             {
-                addedList.Add(listOne[i]);
-            }
-            for (int i = 0; i < listTwo.Count; i++)
-            {
-                addedList.Add(listTwo[i]);
+                addedList.Add(listToAdd[i]);
             }
             return addedList;
         }
 
-        public static CustomList<T> operator -(CustomList<T> listOne, CustomList<T> listTwo)
+        public static CustomList<T> operator +(CustomList<T> listOne, CustomList<T> listTwo)
         {
-            for (int i=0; i<listOne.Count; i++)
+            CustomList<T> addedList = new CustomList<T>();
+            addedList.AddToList(listOne);
+            addedList.AddToList(listTwo);
+            return addedList;
+        }
+
+        CustomList<T> SubtractFromList(CustomList<T> listToSubtract)
+        {
+            for (int i = 0; i < this.Count; i++)
             {
-                for ( int j=0; j<listTwo.Count; j++ )
+                for (int j = 0; j < listToSubtract.Count; j++)
                 {
-                    if ( listOne[i].Equals(listTwo[j]) )
+                    if (this[i].Equals(listToSubtract[j]))
                     {
-                        listOne.Remove(listTwo[j]);
+                        this.Remove(listToSubtract[j]);
                     }
                 }
-
             }
+            return this;
+        }
+
+        public static CustomList<T> operator -(CustomList<T> listOne, CustomList<T> listTwo)
+        {
+            listOne.SubtractFromList(listTwo);
             return listOne;
         }
 
-        int GetMaxCount(CustomList<T> listOne, CustomList<T> listTwo) //this is fucked up
+        int GetMaxCount(CustomList<T> listOne, CustomList<T> listTwo)
         {
             if (listOne.Count <= listTwo.Count)
             {
