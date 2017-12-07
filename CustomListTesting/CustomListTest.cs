@@ -521,64 +521,6 @@ namespace CustomListTesting
             Assert.AreEqual(result, "1234");
         }
 
-        //YOU ARE HERE!!! On Thursday morning, get sign off from Andrew or Mike to implement the IEquatable interface
-        [TestMethod]
-        public void Equals_CreateTwoIdenticalNumberLists_ListsEqualEachother()
-        {
-            //arrange
-            CustomList<int> numberListOne = new CustomList<int>();
-            numberListOne.Add(1);
-            numberListOne.Add(2);
-
-            CustomList<int> numberListTwo = new CustomList<int>();
-            numberListOne.Add(1);
-            numberListOne.Add(2);
-
-            //act
-            bool result = numberListOne.Equals(numberListTwo);
-
-            //assert
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void Equals_CreateTwoIdenticalStringLists_ListsEqualEachother()
-        {
-            //arrange
-            CustomList<string> stringListOne = new CustomList<string>();
-            stringListOne.Add("alpha");
-            stringListOne.Add("beta");
-
-            CustomList<string> stringListTwo = new CustomList<string>();
-            stringListOne.Add("alpha");
-            stringListOne.Add("beta");
-
-            //act
-            bool result = stringListOne.Equals(stringListTwo);
-
-            //assert
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void Equals_CreateTwoIdenticalObjectLists_ListsEqualEachother()
-        {
-            //arrange
-            CustomList<Object> objectListOne = new CustomList<Object>();
-            objectListOne.Add(new Object());
-            objectListOne.Add(new Object());
-
-            CustomList<Object> objectListTwo = new CustomList<Object>();
-            objectListTwo.Add(new Object());
-            objectListTwo.Add(new Object());
-
-            //act
-            bool result = objectListOne.Equals(objectListTwo);
-
-            //assert
-            Assert.IsTrue(result);
-        }
-
         [TestMethod]
         public void Plus_AddTwoIntegerLists_ResultIsCombinedList()
         {
@@ -606,10 +548,18 @@ namespace CustomListTesting
             expectedResult.Add(8);
 
             //act
-            CustomList<int> result = numberListOne + numberListTwo;
+            CustomList<int> addedList = numberListOne + numberListTwo;
+            bool result = true;
+            for (int i=0; i<expectedResult.Count; i++)
+            {
+                if(expectedResult[i] != addedList[i])
+                {
+                    result = false;
+                }
+            }
 
             //assert
-            Assert.AreEqual(result, expectedResult); //NEED TO IMPLEMENT IEquatable interface for this to work
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
@@ -631,11 +581,20 @@ namespace CustomListTesting
             expectedResult.Add("delta");
 
             //act
-            CustomList<string> result = stringListOne + numberListTwo;
+            CustomList<string> addedList = stringListOne + numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != addedList[i])
+                {
+                    result = false;
+                }
+            }
 
             //assert
             Assert.AreEqual(result, expectedResult); //NEED TO IMPLEMENT IEquatable interface for this to work
         }
+
 
     }
 }

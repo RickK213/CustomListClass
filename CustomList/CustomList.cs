@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomListClass
 {
-    public class CustomList<T> : IEnumerable<T>, IEquatable<T>
+    public class CustomList<T> : IEnumerable<T>
     {
         //member variables
         int count;
@@ -157,14 +157,14 @@ namespace CustomListClass
             return result;
         }
 
-        public bool Equals(T other) //NEED TO WRITE THIS! Has to work for different types that you specify?
+        public static CustomList<T> operator+(CustomList<T> listOne, CustomList<T> listTwo)
         {
-            return false;
-        }
-
-        public static CustomList<T> operator+(CustomList<T> listOne, CustomList<T> listTwo) //NEED TO WRITE THIS AFTER MAKING CLASS EQUATABLE
-        { 
-            return new CustomList<T>();
+            CustomList<T> addedList = new CustomList<T>;
+            for ( int i=0; i<listTwo.Count; i++ )
+            {
+                addedList.Add(listTwo[i]);
+            }
+            return listOne;
         }
 
     }
