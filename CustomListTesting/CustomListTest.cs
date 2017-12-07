@@ -779,6 +779,68 @@ namespace CustomListTesting
         }
 
         [TestMethod]
+        public void Minus_SubtracTwoIntegerListsRandomOrder_ResultIsSubtractedList()
+        {
+            //arrange
+            CustomList<int> numberListOne = new CustomList<int>();
+            numberListOne.Add(12);
+            numberListOne.Add(4);
+            numberListOne.Add(3);
+            numberListOne.Add(18);
+
+            CustomList<int> numberListTwo = new CustomList<int>();
+            numberListTwo.Add(4);
+            numberListTwo.Add(12);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            numberListOne.Add(3);
+            numberListOne.Add(18);
+
+            //act
+            CustomList<int> subtractedList = numberListOne - numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != subtractedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Minus_SubtracTwoIntegerListsSecondListHasUnfindables_ResultIsOriginalList()
+        {
+            //arrange
+            CustomList<int> numberListOne = new CustomList<int>();
+            numberListOne.Add(12);
+            numberListOne.Add(4);
+            numberListOne.Add(3);
+            numberListOne.Add(18);
+
+            CustomList<int> numberListTwo = new CustomList<int>();
+            numberListTwo.Add(78);
+            numberListTwo.Add(-45);
+
+            //act
+            CustomList<int> subtractedList = numberListOne - numberListTwo;
+            bool result = true;
+            for (int i = 0; i < numberListOne.Count; i++)
+            {
+                if (numberListOne[i] != subtractedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
         public void Minus_SubtracTwoStringLists_ResultIsSubtractedList()
         {
             //arrange
@@ -824,6 +886,41 @@ namespace CustomListTesting
             CustomList<string> numberListTwo = new CustomList<string>();
             numberListOne.Add("beta");
             numberListOne.Add("delta");
+
+            CustomList<string> expectedResult = new CustomList<string>();
+            numberListOne.Add("alpha");
+            numberListOne.Add("charlie");
+
+            //act
+            CustomList<string> subtractedList = numberListOne - numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != subtractedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Minus_SubtracTwoStringListsSecondStringHasUnfindables_ResultIsSubtractedList()
+        {
+            //arrange
+            CustomList<string> numberListOne = new CustomList<string>();
+            numberListOne.Add("alpha");
+            numberListOne.Add("beta");
+            numberListOne.Add("charlie");
+            numberListOne.Add("delta");
+
+            CustomList<string> numberListTwo = new CustomList<string>();
+            numberListOne.Add("yankee");
+            numberListOne.Add("delta");
+            numberListOne.Add("zulu");
+            numberListOne.Add("beta");
 
             CustomList<string> expectedResult = new CustomList<string>();
             numberListOne.Add("alpha");
