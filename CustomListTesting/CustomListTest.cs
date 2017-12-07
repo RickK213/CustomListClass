@@ -161,7 +161,6 @@ namespace CustomListTesting
             //act
             myList.Remove(obj);
 
-
             //assert
             Assert.AreEqual(myList.Count, 0);
         }
@@ -639,12 +638,12 @@ namespace CustomListTesting
             numberListOne.Add("delta");
 
             CustomList<string> numberListTwo = new CustomList<string>();
-            numberListTwo.Add("charlie");
-            numberListTwo.Add("delta");
+            numberListOne.Add("alpha");
+            numberListOne.Add("beta");
 
             CustomList<string> expectedResult = new CustomList<string>();
-            expectedResult.Add("alpha");
-            expectedResult.Add("beta");
+            numberListOne.Add("charlie");
+            numberListOne.Add("delta");
 
             //act
             CustomList<string> subtractedList = numberListOne - numberListTwo;
@@ -660,6 +659,184 @@ namespace CustomListTesting
             //assert
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void Minus_SubtracTwoStringListsWithDifferentOrder_ResultIsSubtractedList()
+        {
+            //arrange
+            CustomList<string> numberListOne = new CustomList<string>();
+            numberListOne.Add("alpha");
+            numberListOne.Add("beta");
+            numberListOne.Add("charlie");
+            numberListOne.Add("delta");
+
+            CustomList<string> numberListTwo = new CustomList<string>();
+            numberListOne.Add("beta");
+            numberListOne.Add("delta");
+
+            CustomList<string> expectedResult = new CustomList<string>();
+            numberListOne.Add("alpha");
+            numberListOne.Add("charlie");
+
+            //act
+            CustomList<string> subtractedList = numberListOne - numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != subtractedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Zip_ZipTwoIntegerLists_ResultIsZippedList()
+        {
+            //arrange
+            CustomList<int> numberListOdd = new CustomList<int>();
+            numberListOdd.Add(1);
+            numberListOdd.Add(3);
+            numberListOdd.Add(5);
+
+            CustomList<int> numberListEven = new CustomList<int>();
+            numberListEven.Add(2);
+            numberListEven.Add(4);
+            numberListEven.Add(6);
+
+            CustomList<int> expectedList = new CustomList<int>();
+            expectedList.Add(1);
+            expectedList.Add(2);
+            expectedList.Add(3);
+            expectedList.Add(4);
+            expectedList.Add(5);
+            expectedList.Add(6);
+
+            //act
+            CustomList<int> zippedList = numberListOdd.Zip(numberListEven);
+            bool result = true;
+            for (int i = 0; i < zippedList.Count; i++)
+            {
+                if (zippedList[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Zip_ZipTwoStringLists_ResultIsZippedList()
+        {
+            //arrange
+            CustomList<string> stringListOdd = new CustomList<string>();
+            stringListOdd.Add("alpha");
+            stringListOdd.Add("charlie");
+            stringListOdd.Add("echo");
+
+            CustomList<string> stringListEven = new CustomList<string>();
+            stringListEven.Add("bravo");
+            stringListEven.Add("delta");
+            stringListEven.Add("foxtrot");
+
+            CustomList<string> expectedList = new CustomList<string>();
+            expectedList.Add("alpha");
+            expectedList.Add("bravo");
+            expectedList.Add("charlie");
+            expectedList.Add("delta");
+            expectedList.Add("echo");
+            expectedList.Add("foxtrot");
+
+            //act
+            CustomList<string> zippedList = stringListOdd.Zip(stringListEven);
+            bool result = true;
+            for (int i = 0; i < zippedList.Count; i++)
+            {
+                if (zippedList[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Zip_ZipTwoUnevenIntegerListsShorterFirst_ResultIsZippedListLimitedByShorterList()
+        {
+            //arrange
+            CustomList<int> numberListOdd = new CustomList<int>();
+            numberListOdd.Add(1);
+            numberListOdd.Add(3);
+
+            CustomList<int> numberListEven = new CustomList<int>();
+            numberListEven.Add(2);
+            numberListEven.Add(4);
+            numberListEven.Add(6);
+            numberListEven.Add(8);
+
+            CustomList<int> expectedList = new CustomList<int>();
+            expectedList.Add(1);
+            expectedList.Add(2);
+            expectedList.Add(3);
+            expectedList.Add(4);
+
+            //act
+            CustomList<int> zippedList = numberListOdd.Zip(numberListEven);
+            bool result = true;
+            for (int i = 0; i < zippedList.Count; i++)
+            {
+                if (zippedList[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Zip_ZipTwoUnevenIntegerListsShorterSecond_ResultIsZippedListLimitedByShorterList()
+        {
+            //arrange
+            CustomList<int> numberListOdd = new CustomList<int>();
+            numberListOdd.Add(1);
+            numberListOdd.Add(3);
+            numberListOdd.Add(5);
+            numberListOdd.Add(7);
+
+            CustomList<int> numberListEven = new CustomList<int>();
+            numberListEven.Add(2);
+            numberListEven.Add(4);
+
+            CustomList<int> expectedList = new CustomList<int>();
+            expectedList.Add(1);
+            expectedList.Add(2);
+            expectedList.Add(3);
+            expectedList.Add(4);
+
+            //act
+            CustomList<int> zippedList = numberListOdd.Zip(numberListEven);
+            bool result = true;
+            for (int i = 0; i < zippedList.Count; i++)
+            {
+                if (zippedList[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
 
     }
 }

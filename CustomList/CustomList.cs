@@ -173,7 +173,43 @@ namespace CustomListClass
 
         public static CustomList<T> operator -(CustomList<T> listOne, CustomList<T> listTwo)
         {
-            return new CustomList<T>();
+            for (int i=0; i<listOne.Count; i++)
+            {
+                for ( int j=0; j<listTwo.Count; j++ )
+                {
+                    if ( listOne[i].Equals(listTwo[j]) )
+                    {
+                        listOne.Remove(listTwo[j]);
+                    }
+                }
+
+            }
+            return listOne;
+        }
+
+        int GetMaxCount(CustomList<T> listOne, CustomList<T> listTwo) //this is fucked up
+        {
+            if (listOne.Count <= listTwo.Count)
+            {
+                return listOne.Count;
+            }
+            else
+            {
+                return listTwo.Count;
+            }
+        }
+
+        public CustomList<T> Zip(CustomList<T> listTwo)
+        {
+            CustomList<T> listOne = this;
+            CustomList<T> zippedList = new CustomList<T>();
+            int maxCount = GetMaxCount(listOne, listTwo);
+            for (int i=0; i<maxCount; i++)
+            {
+                zippedList.Add(listOne[i]);
+                zippedList.Add(listTwo[i]);
+            }
+            return zippedList;
         }
 
     }
