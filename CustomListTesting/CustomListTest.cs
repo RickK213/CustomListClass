@@ -608,6 +608,28 @@ namespace CustomListTesting
         }
 
         [TestMethod]
+        public void ToString_AddFourObjects_ResultIsSystemDescriptionOfObjects()
+        {
+            //arrange
+            CustomList<Object> myList = new CustomList<Object>();
+            for (int i=0; i<4; i++)
+            {
+                myList.Add(new Object());
+            }
+
+            //act
+            string result = myList.ToString();
+            string descriptionString = "";
+            for (int i = 0; i < 4; i++)
+            {
+                descriptionString += "System.Object";
+            }
+
+            //assert
+            Assert.AreEqual(result, descriptionString);
+        }
+
+        [TestMethod]
         public void Plus_AddTwoIntegerLists_ResultIsCombinedList()
         {
             //arrange
