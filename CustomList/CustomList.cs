@@ -32,6 +32,10 @@ namespace CustomListClass
             {
                 if ( i > count-1 )
                 {
+                    //Note: I did not throw the built in System.IndexOutOfRangeException exception becuase according to the Microsoft C# programming guide:
+                    //Do not throw System.Exception, System.SystemException, System.NullReferenceException,
+                    //or System.IndexOutOfRangeException intentionally from your own source code.
+                    //FOUND HERE: docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/creating-and-throwing-exceptions
                     throw new Exception("Index out of range of CustomList");
                 }
                 else

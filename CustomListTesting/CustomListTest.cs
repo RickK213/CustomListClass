@@ -1084,7 +1084,5 @@ namespace CustomListTesting
             //assert
             Assert.IsTrue(result);
         }
-
-
     }
 }
