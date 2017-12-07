@@ -619,6 +619,7 @@ namespace CustomListTesting
 
             //act
             string result = myList.ToString();
+
             string descriptionString = "";
             for (int i = 0; i < 4; i++)
             {
@@ -658,9 +659,50 @@ namespace CustomListTesting
             //act
             CustomList<int> addedList = numberListOne + numberListTwo;
             bool result = true;
-            for (int i=0; i<expectedResult.Count; i++)
+            for (int i = 0; i < expectedResult.Count; i++)
             {
-                if(expectedResult[i] != addedList[i])
+                if (expectedResult[i] != addedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Plus_AddTwoDoubleListsFormattedDifferently_ResultIsCombinedList()
+        {
+            //arrange
+            CustomList<double> numberListOne = new CustomList<double>();
+            numberListOne.Add(.10);
+            numberListOne.Add(.20);
+            numberListOne.Add(.30);
+            numberListOne.Add(.40);
+
+            CustomList<double> numberListTwo = new CustomList<double>();
+            numberListTwo.Add(.5);
+            numberListTwo.Add(.6);
+            numberListTwo.Add(.7);
+            numberListTwo.Add(.8);
+
+            CustomList<double> expectedResult = new CustomList<double>();
+            expectedResult.Add(.1);
+            expectedResult.Add(.20);
+            expectedResult.Add(.3);
+            expectedResult.Add(.40);
+            expectedResult.Add(.5);
+            expectedResult.Add(.60);
+            expectedResult.Add(.7);
+            expectedResult.Add(.80);
+
+            //act
+            CustomList<double> addedList = numberListOne + numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != addedList[i])
                 {
                     result = false;
                 }
