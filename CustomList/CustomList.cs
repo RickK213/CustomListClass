@@ -203,12 +203,11 @@ namespace CustomListClass
 
         public CustomList<T> Zip(CustomList<T> listTwo)
         {
-            CustomList<T> listOne = this;
             CustomList<T> zippedList = new CustomList<T>();
-            int maxCount = GetMaxCount(listOne, listTwo);
+            int maxCount = GetMaxCount(this, listTwo);
             for (int i=0; i<maxCount; i++)
             {
-                zippedList.Add(listOne[i]);
+                zippedList.Add(this[i]);
                 zippedList.Add(listTwo[i]);
             }
             return zippedList;

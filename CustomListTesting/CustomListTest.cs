@@ -8,43 +8,39 @@ namespace CustomListTesting
     public class CustomListTest
     {
 
-        //Add method tests=====================================================================================================
         [TestMethod]
         public void Add_AddFirstString_FirstItemEqualsStringAdded()
         {
             //arrange
-            string testString = "Rick";
+            string firstString = "alpha";
             CustomList<string> myList = new CustomList<string>();
 
             //act
-            myList.Add(testString);
+            myList.Add(firstString);
 
             //assert
-            //How to reference an index of a custom class? Refer to the internal array.
-            //answer: LOOK UP C# indexer!!
-            //also, will need to use IEnumerable interface later on!!!
-            Assert.AreEqual(myList[0], testString);
+            Assert.AreEqual(myList[0], firstString);
         }
 
         [TestMethod]
-        public void Add_AddFirstItem_CountEqualsOne()
+        public void Add_AddFirstString_CountEqualsOne()
         {
             //arrange
-            string testString = "Rick";
+            string firstString = "alpha";
             CustomList<string> myList = new CustomList<string>();
 
             //act
-            myList.Add(testString);
+            myList.Add(firstString);
 
             //assert
-            Assert.AreEqual(myList.Count, 1); //Need to set up Count as a property!!! Read-only!
+            Assert.AreEqual(myList.Count, 1);
         }
 
         [TestMethod]
         public void Add_AddFiveItems_CountEqualsFive()
         {
             //arrange
-            string testString = "Rick";
+            string testString = "alpha";
             CustomList<string> myList = new CustomList<string>();
 
             //act
@@ -54,7 +50,7 @@ namespace CustomListTesting
             }
 
             //assert
-            Assert.AreEqual(myList.Count, 5); //Need to set up Count as a property!!!
+            Assert.AreEqual(myList.Count, 5);
         }
 
         [TestMethod]
@@ -70,7 +66,33 @@ namespace CustomListTesting
             }
 
             //assert
-            Assert.AreEqual(myList.Count, 5); //Need to set up Count as a property!!!
+            Assert.AreEqual(myList.Count, 5);
+        }
+
+        [TestMethod]
+        public void Add_CreateNewList_CountEqualsZero()
+        {
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+
+            //act
+
+            //assert
+            Assert.AreEqual(myList.Count, 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.OutOfMemoryException))]
+        public void Add_AddIntMaxItems_CountEqualsIntMax()
+        {
+            //arrange
+            CustomList<int> myList = new CustomList<int>();
+
+            //act
+            for (int i = 0; i < Int32.MaxValue; i++)
+            {
+                myList.Add(i);
+            }
         }
 
         [TestMethod]
@@ -135,7 +157,6 @@ namespace CustomListTesting
             Assert.AreEqual(Int32.Parse(myList[12]), 12);
         }
 
-        //Remove method tests=================================================================================================
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void Remove_AddAndRemoveOneObject_CustomListZeroIndexThrowsException()
