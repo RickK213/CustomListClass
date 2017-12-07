@@ -490,6 +490,22 @@ namespace CustomListTesting
         }
 
         [TestMethod]
+        [ExpectedException(typeof(System.IndexOutOfRangeException))]
+        public void RemoveAt_UseNegativeIndex_ThrowsIndexOutOfRangeException()
+        {
+            //arrange
+            CustomList<string> myList = new CustomList<string>();
+            myList.Add("alpha");
+            myList.Add("beta");
+            myList.Add("charlie");
+            myList.Add("delta");
+
+            //act
+            myList.RemoveAt(-1);
+
+        }
+
+        [TestMethod]
         public void GetEnumerator_AddTwoIntegersToListForeachToCalculateSum_SumIsAllCorrectSumOfAllListItems()
         {
             //arrange
