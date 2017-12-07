@@ -592,9 +592,74 @@ namespace CustomListTesting
             }
 
             //assert
-            Assert.AreEqual(result, expectedResult); //NEED TO IMPLEMENT IEquatable interface for this to work
+            Assert.IsTrue(result);
         }
 
+        [TestMethod]
+        public void Minus_SubtracTwoIntegerLists_ResultIsSubtractedList()
+        {
+            //arrange
+            CustomList<int> numberListOne = new CustomList<int>();
+            numberListOne.Add(1);
+            numberListOne.Add(2);
+            numberListOne.Add(3);
+            numberListOne.Add(4);
+
+            CustomList<int> numberListTwo = new CustomList<int>();
+            numberListTwo.Add(3);
+            numberListTwo.Add(4);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            numberListOne.Add(1);
+            numberListOne.Add(2);
+
+            //act
+            CustomList<int> subtractedList = numberListOne - numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != subtractedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Minus_SubtracTwoStringLists_ResultIsSubtractedList()
+        {
+            //arrange
+            CustomList<string> numberListOne = new CustomList<string>();
+            numberListOne.Add("alpha");
+            numberListOne.Add("beta");
+            numberListOne.Add("charlie");
+            numberListOne.Add("delta");
+
+            CustomList<string> numberListTwo = new CustomList<string>();
+            numberListTwo.Add("charlie");
+            numberListTwo.Add("delta");
+
+            CustomList<string> expectedResult = new CustomList<string>();
+            expectedResult.Add("alpha");
+            expectedResult.Add("beta");
+
+            //act
+            CustomList<string> subtractedList = numberListOne - numberListTwo;
+            bool result = true;
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                if (expectedResult[i] != subtractedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
 
     }
 }

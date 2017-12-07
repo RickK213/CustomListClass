@@ -157,14 +157,23 @@ namespace CustomListClass
             return result;
         }
 
-        public static CustomList<T> operator+(CustomList<T> listOne, CustomList<T> listTwo)
+        public static CustomList<T> operator +(CustomList<T> listOne, CustomList<T> listTwo)
         {
-            CustomList<T> addedList = new CustomList<T>;
-            for ( int i=0; i<listTwo.Count; i++ )
+            CustomList<T> addedList = new CustomList<T>();
+            for (int i = 0; i < listOne.Count; i++)
+            {
+                addedList.Add(listOne[i]);
+            }
+            for (int i = 0; i < listTwo.Count; i++)
             {
                 addedList.Add(listTwo[i]);
             }
-            return listOne;
+            return addedList;
+        }
+
+        public static CustomList<T> operator -(CustomList<T> listOne, CustomList<T> listTwo)
+        {
+            return new CustomList<T>();
         }
 
     }
