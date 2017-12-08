@@ -106,16 +106,9 @@ namespace CustomListClass
 
         public void RemoveAt(int itemIndex)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = itemIndex+1; i < count; i++)
             {
-                if (i < itemIndex)
-                {
-                    listItems[i] = listItems[i];
-                }
-                else if (i > itemIndex)
-                {
-                    listItems[i - 1] = listItems[i];
-                }
+                listItems[i - 1] = listItems[i];
             }
             count--;
         }
@@ -215,6 +208,13 @@ namespace CustomListClass
                 zippedList.Add(listTwo[i]);
             }
             return zippedList;
+        }
+
+        public CustomList<T> Sort()
+        {
+
+
+            return new CustomList<T>();
         }
 
     }

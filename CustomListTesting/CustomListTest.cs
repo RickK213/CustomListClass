@@ -1084,5 +1084,156 @@ namespace CustomListTesting
             //assert
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void Sort_AddOutOfOrderIntegers_ResultIsSortedList()
+        {
+            //arrange
+            CustomList<int> listToSort = new CustomList<int>();
+            listToSort.Add(6);
+            listToSort.Add(2);
+            listToSort.Add(4);
+            listToSort.Add(8);
+
+            CustomList<int> expectedList = new CustomList<int>();
+            expectedList.Add(2);
+            expectedList.Add(4);
+            expectedList.Add(6);
+            expectedList.Add(8);
+
+            //act
+            listToSort.Sort();
+            bool result = true;
+            for (int i = 0; i < listToSort.Count; i++)
+            {
+                if (listToSort[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Sort_AddOutOfOrderDoubles_ResultIsSortedList()
+        {
+            //arrange
+            CustomList<double> listToSort = new CustomList<double>();
+            listToSort.Add(.60);
+            listToSort.Add(.2);
+            listToSort.Add(.4);
+            listToSort.Add(.80);
+
+            CustomList<double> expectedList = new CustomList<double>();
+            expectedList.Add(.20);
+            expectedList.Add(.40);
+            expectedList.Add(.6);
+            expectedList.Add(.8);
+
+            //act
+            listToSort.Sort();
+            bool result = true;
+            for (int i = 0; i < listToSort.Count; i++)
+            {
+                if (listToSort[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Sort_AddOutOfOrderStrings_ResultIsSortedList()
+        {
+            //arrange
+            CustomList<string> listToSort = new CustomList<string>();
+            listToSort.Add("r");
+            listToSort.Add("i");
+            listToSort.Add("c");
+            listToSort.Add("k");
+
+            CustomList<string> expectedList = new CustomList<string>();
+            expectedList.Add("c");
+            expectedList.Add("i");
+            expectedList.Add("k");
+            expectedList.Add("r");
+
+            //act
+            listToSort.Sort();
+            bool result = true;
+            for (int i = 0; i < listToSort.Count; i++)
+            {
+                if (listToSort[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Sort_AddOutOfOrderComplexStrings_ResultIsSortedList()
+        {
+            //arrange
+            CustomList<string> listToSort = new CustomList<string>();
+            listToSort.Add("!hello");
+            listToSort.Add("how");
+            listToSort.Add("are");
+            listToSort.Add("you?");
+
+            CustomList<string> expectedList = new CustomList<string>();
+            listToSort.Add("!hello");
+            expectedList.Add("are");
+            listToSort.Add("how");
+            listToSort.Add("you?");
+
+            //act
+            listToSort.Sort();
+            bool result = true;
+            for (int i = 0; i < listToSort.Count; i++)
+            {
+                if (listToSort[i] != expectedList[i])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Sort_LargeListOfRandomIntegers_ResultIsSortedList()
+        {
+            //arrange
+            CustomList<int> listToSort = new CustomList<int>();
+            Random random = new Random();
+            for ( int i=0; i<1000; i++ )
+            {
+                listToSort.Add(random.Next(0,1001));
+            }
+
+            //act
+            listToSort.Sort();
+            bool result = true;
+            for (int i = 0; i < listToSort.Count; i++)
+            {
+                if (listToSort[i] > listToSort[i+1])
+                {
+                    result = false;
+                }
+            }
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
     }
 }
