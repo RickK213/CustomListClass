@@ -1,5 +1,5 @@
 <h1>Custom List Class</h1>
-<h3><em>A C# project with the goal of re-writing the build in List Class.</h3>
+<h3><em>A C# project with the goal of re-writing the build in List Class.</em></h3>
 <p>The CustomList class is enumerable and has a Count property.</p>
 <h4>Methods include:</h4>
 <ol>
