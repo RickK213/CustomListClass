@@ -139,12 +139,12 @@ namespace CustomListClass
 
         public override string ToString()
         {
-            string result = "";
+            StringBuilder result = new StringBuilder();
             for (int i = 0; i < count; i++)
             {
-                result += listItems[i].ToString();
+                result.Append(listItems[i]);
             }
-            return result;
+            return result.ToString();
         }
 
         CustomList<T> AddToList(CustomList<T> listToAdd)
@@ -212,9 +212,64 @@ namespace CustomListClass
 
         public CustomList<T> Sort()
         {
+            Type type = listItems.GetType().GetElementType();
+            if (!type.GetInterfaces().Contains(typeof(IComparable)))
+            {
+                return this;
+            }
+            if (type.ToString() == "System.Int32" )
+            {
+                int[] numbers = new int[count];
+                for ( int i=0; i<count; i++ )
+                {
+                    numbers[i] = Convert.ToInt32(listItems[i]);
+                }
+                SortQuick(numbers, 0, count-1);
+                return numbers as CustomList<T>;
+            }
 
+            return this;
+        }
 
-            return new CustomList<T>();
+        //QuickSort Methods::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+        static public int Partition(int[] numbers, int left, int right)
+        {
+            int pivot = numbers[left];
+            while (true)
+            {
+                while (numbers[left] < pivot)
+                    left++;
+
+                while (numbers[right] > pivot)
+                    right--;
+
+                if (left < right)
+                {
+                    int temp = numbers[right];
+                    numbers[right] = numbers[left];
+                    numbers[left] = temp;
+                }
+                else
+                {
+                    return right;
+                }
+            }
+        }
+
+        static public void SortQuick(int[] arr, int left, int right)
+        {
+            // For Recusrion  
+            if (left < right)
+            {
+                int pivot = Partition(arr, left, right);
+
+                if (pivot > 1)
+                    SortQuick(arr, left, pivot - 1);
+
+                if (pivot + 1 < right)
+                    SortQuick(arr, pivot + 1, right);
+            }
         }
 
     }

@@ -1215,9 +1215,9 @@ namespace CustomListTesting
             //arrange
             CustomList<int> listToSort = new CustomList<int>();
             Random random = new Random();
-            for ( int i=0; i<1000; i++ )
+            for (int i = 0; i < 1000; i++)
             {
-                listToSort.Add(random.Next(0,1001));
+                listToSort.Add(random.Next(0, 1001));
             }
 
             //act
@@ -1225,7 +1225,7 @@ namespace CustomListTesting
             bool result = true;
             for (int i = 0; i < listToSort.Count; i++)
             {
-                if (listToSort[i] > listToSort[i+1])
+                if (listToSort[i] > listToSort[i + 1])
                 {
                     result = false;
                 }
